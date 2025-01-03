@@ -65,7 +65,8 @@ function Login() {
         localStorage.setItem('token', responseData.token);
         localStorage.setItem('nombreCompleto', responseData.nombreCompleto);
         localStorage.setItem('rol', responseData.rol);
-        localStorage.setItem('id', responseData.id)
+        localStorage.setItem('id', responseData.id);
+        localStorage.setItem('estado', responseData.nombre_estado); 
         if (responseData.rol === 'Operador') {
           navigate('/ordenes'); 
         } else if (responseData.rol === 'Cliente') {

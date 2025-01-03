@@ -63,12 +63,12 @@ function UsuariosList() {
       });
 
       if (!response.ok) throw new Error('Error al eliminar el usuario con id :' + UsuarioToDelete);
-
       setRefresh(!refresh);
       setMensaje('Usuario eliminado con éxito');
       setTipoMensaje('success');
       setAbrirSnackbar(true);
       setOpenDeleteDialog(false);
+
     } catch (error) {
       console.error('Error al eliminar usuario:', error);
       alert('No se pudo eliminar el usuario');

@@ -52,6 +52,7 @@ const NavigationBar = () => {
     localStorage.removeItem('carrito'); // Elimina el carrito
     localStorage.removeItem('rol'); // Elimina el rol
     localStorage.removeItem('id');
+    localStorage.removeItem('estado');
     limpiarCarrito();
     navigate('/login'); // Redirige a la página de inicio de sesión
   };
