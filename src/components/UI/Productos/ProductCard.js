@@ -13,10 +13,8 @@ const ProductCard = ({ producto, agregarAlCarrito }) => {
   };
 
   const handleAgregarAlCarrito = () => {
-    if (producto.stock > 0) {
       agregarAlCarrito(producto, cantidad);
       setCantidad(1);
-    }
   };
 
   return (

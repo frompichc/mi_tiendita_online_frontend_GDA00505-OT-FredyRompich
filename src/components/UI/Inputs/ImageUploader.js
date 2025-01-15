@@ -50,8 +50,6 @@ function ImageUploader({ name, label, onImageChange, alt, required, initialImage
         style={{ display: 'none' }} // Ocultamos el input por defecto
       />
 
-     
-
       {
         imagePreview && (
           <Card sx={{ marginTop: '20px' }}>

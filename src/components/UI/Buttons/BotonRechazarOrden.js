@@ -3,7 +3,6 @@ import { IconButton, Tooltip } from '@mui/material';
 import BotonRechazarOrdenIcono from '@mui/icons-material/ThumbDown';
 
 const BotonRechazarOrden = ({ onClick, tooltip, disabled }) => {
-    // Según el tipo de acción, mostramos el icono correspondiente
   
     return (
       <Tooltip title={tooltip} arrow>

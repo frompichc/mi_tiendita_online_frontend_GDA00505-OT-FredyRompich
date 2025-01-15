@@ -17,6 +17,7 @@ function ClientesList() {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false); // Para abrir el diálogo de eliminación
   const [ClienteToDelete, setClienteToDelete] = useState(null); // ID del cliente a eliminar
   const [mensaje, setMensaje] = useState(''); 
+  const [tipoMensaje, setTipoMensaje] = useState(''); 
   const [abrirSnackbar, setAbrirSnackbar] = useState(false);
   const navigate = useNavigate();
 
@@ -59,12 +60,14 @@ function ClientesList() {
       if (!response.ok) throw new Error('Error al eliminar cliente con id ' + ClienteToDelete);
 
       setMensaje('Cliente eliminado con éxito');
+      setTipoMensaje('success');
       setAbrirSnackbar(true); // Abre el Snackbar
       setRefresh(!refresh); // Refresca la lista de clientes
       setOpenDeleteDialog(false); // Cierra el diálogo de confirmación
     } catch (error) {
-      console.error('Error al eliminar cliente', error);
-      alert('No se pudo eliminar cliente');
+      setMensaje(`Error al eliminar cliente ${error}`);
+      setTipoMensaje('Error');
+      setAbrirSnackbar(true); // Abre el Snackbar
       setOpenDeleteDialog(false); // Cierra el diálogo de confirmación
     }
   };
@@ -94,7 +97,7 @@ function ClientesList() {
         />
         <BotonEliminar
           tooltip="Eliminar cliente"
-          onClick={() => handleDeleteClick(cliente.idCliente)} // Abre el diálogo de eliminación
+          onClick={() => handleDeleteClick(cliente.idCliente)}
         />
       </div>
     ),
@@ -109,7 +112,6 @@ function ClientesList() {
       />
       <TablaMuestraDatos headers={headers} data={tableData} />
 
-      {/* Usamos el componente ConfirmDeleteDialog */}
         <ConfirmDeleteDialog
             open={openDeleteDialog}
             onClose={handleDeleteCancel}
@@ -118,12 +120,12 @@ function ClientesList() {
             texto={'Estas seguro que quieres eliminar cliente con ID: '}
         />
 
-       {/* Componente SnackBarPersonalizable */}
 
        <SnackBarPersonalizable
             abrir={abrirSnackbar}
             cerrar={handleCloseSnackbar}
             mensaje={mensaje}
+            tipo={tipoMensaje}
         />
     </div>
   );

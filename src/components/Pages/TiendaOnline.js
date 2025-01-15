@@ -10,8 +10,8 @@ function TiendaOnline() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [mensaje, setMensaje] = useState(''); 
+  const [tipoMensaje, setTipoMensaje] = useState(''); 
   const [abrirSnackbar, setAbrirSnackbar] = useState(false);
-  
 
   const { agregarAlCarrito } = useContext(CartContext);
 
@@ -37,15 +37,16 @@ function TiendaOnline() {
   }, []);
 
   const manejarAgregarAlCarrito = (producto, cantidad) => {
-    if (cantidad > producto.stock) {
-      setMensaje(`No puedes agregar más de ${producto.stock} ${producto.nombre} al carrito.`);
+    const carritoError = agregarAlCarrito(producto, cantidad);
+    if (carritoError) {
+      setMensaje(carritoError);
+      setTipoMensaje('warning');  
+      setAbrirSnackbar(true);      
+    } else  {
+      setMensaje(`Agregaste ${cantidad} ${producto.nombre} al carrito!`);
+      setTipoMensaje('success');  
       setAbrirSnackbar(true);
-      return; 
     }
-
-    agregarAlCarrito(producto, cantidad);
-    setMensaje(`Agregaste ${cantidad} ${producto.nombre} al carrito!`);
-    setAbrirSnackbar(true);
   };
 
   const handleCloseSnackbar = () => {
@@ -64,6 +65,7 @@ function TiendaOnline() {
         abrir={abrirSnackbar}
         cerrar={handleCloseSnackbar}
         mensaje={mensaje}
+        tipo={tipoMensaje}
       />
     </div>
   );

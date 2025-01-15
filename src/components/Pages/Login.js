@@ -17,7 +17,6 @@ const validationSchema = Yup.object({
     .required('El nombre del rol es obligatorio'),
 });
 
-// Componente de inicio de sesión
 function Login() {
 
   const methods = useForm({
@@ -34,16 +33,15 @@ function Login() {
     const rol = localStorage.getItem('rol');
     if (token) {
       if (rol === 'Operador') {
-        navigate('/ordenes'); // Redirigir al panel de órdenes
+        navigate('/ordenes'); 
       } else if (rol === 'Cliente') {
-        navigate('/tiendaonline'); // Redirigir a la tienda
+        navigate('/tiendaonline'); 
       }
     }
   }, [navigate]);
 
   const onSubmit = async (data) => {
     const { correo_electronico_login, password_usuario_login } = data;
-    // Convertimos los nombres de las propiedades
     try {
       const loginData = {
         correo_electronico: correo_electronico_login,
@@ -61,12 +59,11 @@ function Login() {
       const responseData = await response.json();
 
       if (response.ok) {
-        console.log(responseData);
         localStorage.setItem('token', responseData.token);
         localStorage.setItem('nombreCompleto', responseData.nombreCompleto);
         localStorage.setItem('rol', responseData.rol);
         localStorage.setItem('id', responseData.id);
-        localStorage.setItem('estado', responseData.nombre_estado); 
+        localStorage.setItem('estado', responseData.estado); 
         if (responseData.rol === 'Operador') {
           navigate('/ordenes'); 
         } else if (responseData.rol === 'Cliente') {

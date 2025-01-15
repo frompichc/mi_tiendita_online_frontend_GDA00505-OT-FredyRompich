@@ -58,7 +58,6 @@ const NavigationBar = () => {
   };
 
   const operadornavItems = [
-    //{ label: 'Productos', path: '/productos', tooltip: 'Ver productos' },
     { label: 'Productos', path: '/productos', tooltip: 'Ir a productos' },
     { label: 'Usuarios', path: '/usuarios', tooltip: 'Ir a usuarios' },
     { label: 'Clientes', path: '/clientes', tooltip: 'Ir a clientes' },
